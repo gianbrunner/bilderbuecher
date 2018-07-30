@@ -1,0 +1,27 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Routes for Picture
+GET     /api/pictures               controllers.PictureController.getAllPictures()
+GET     /api/pictures/:id           controllers.PictureController.getPicture(id: Long)
+POST    /api/pictures               controllers.PictureController.addPicture()
+PUT     /api/pictures/:id           controllers.PictureController.updatePicture(id: Long)
+DELETE  /api/pictures/:id           controllers.PictureController.deletePicture(id: Long)
+
+# Routes for Collection
+GET     /api/collections            controllers.CollectionController.getAllCollections()
+GET     /api/collections/:id        controllers.CollectionController.getCollection(id: Long)
+POST    /api/collections            controllers.CollectionController.addCollection()
+PUT     /api/collections/:id        controllers.CollectionController.updateCollection(id: Long)
+DELETE  /api/collections/:id        controllers.CollectionController.deleteCollection(id: Long)
+
+
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+
