@@ -51,7 +51,7 @@ public class PictureController extends Controller{
 
     public Result deletePicture(Long id){
         if(pictureService.delete(id)){
-            return ok();
+            return ok("Picture deleted");
         }
         return internalServerError();
     }

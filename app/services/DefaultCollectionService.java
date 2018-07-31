@@ -11,11 +11,13 @@ public class DefaultCollectionService implements CollectionService{
 
     public DefaultCollectionService(){
         collections = new ArrayList<>();
+        defaultPictureService = new DefaultPictureService();
         collections.add(createCollection());
     }
 
     private Collection createCollection(){
         final Collection collection = new Collection();
+        collection.setId(1L);
         collection.setName("Sunrise Dubai");
         collection.setPicture(defaultPictureService.createPicture());
 
