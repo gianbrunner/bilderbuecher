@@ -1,64 +1,33 @@
 package services;
 
+
 import models.Collection;
+import models.CollectionRepository;
+import models.Collection;
+
+import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Stream;
 
-public class DefaultCollectionService implements CollectionService{
+public class DefaultCollectionService implements CollectionService {
+
     private List<Collection> collections;
-    private DefaultPictureService defaultPictureService;
+    private CollectionRepository collectionRepository;
 
-    public DefaultCollectionService(){
+    @Inject
+    public DefaultCollectionService (CollectionRepository collectionRepository){
         collections = new ArrayList<>();
-        defaultPictureService = new DefaultPictureService();
-        collections.add(createCollection());
+        this.collectionRepository = collectionRepository;
     }
 
-    private Collection createCollection(){
-        final Collection collection = new Collection();
-        collection.setId(1L);
-        collection.setName("Sunrise Dubai");
-        collection.setPicture(defaultPictureService.createPicture());
+    public CompletionStage<Stream<Collection>> get() { return collectionRepository.list();}
 
-        return collection;
-    }
+    public CompletionStage<Collection> get(final long id){ return collectionRepository.find(id);}
 
-    public List<Collection> get() {return collections; }
+    public CompletionStage<Boolean> delete(final long id){ return collectionRepository.remove(id); }
 
-    public Collection get (final Long id){
-        for(Collection collection: collections){
-            if(collection.getId() == id){
-                return collection;
-            }
-        }
-        return null;
-    }
+    public CompletionStage<Collection> add(final Collection collection) {return collectionRepository.add(collection);}
 
-    public boolean delete(final Long id){
-        for (Iterator<Collection> it = collections.iterator(); it.hasNext();){
-            Collection collection = it.next();
-            if(collection.getId() == id){
-                it.remove();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Collection update(final Collection updatedCollection){
-        for(Collection collection: collections){
-            if(collection.getId() == updatedCollection.getId()){
-                collection.setName(updatedCollection.getName());
-                collection.setPicture(updatedCollection.getPicture());
-                return collection;
-            }
-        }
-        return null;
-    }
-
-    public Collection add(final Collection collection){
-        collections.add(collection);
-        return collection;
-    }
 }

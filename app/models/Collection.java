@@ -1,9 +1,13 @@
 package models;
+import javax.persistence.*;
 
+@Entity(name = "collection")
 public class Collection {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Picture picture;
 
     public Long getId() {
         return id;
@@ -19,13 +23,5 @@ public class Collection {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Picture getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Picture picture) {
-        this.picture = picture;
     }
 }

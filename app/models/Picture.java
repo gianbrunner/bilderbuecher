@@ -1,10 +1,14 @@
 package models;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import javax.persistence.*;
 
+@Entity(name = "picture")
 public class Picture {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long fk_id;
     private String name;
     private String photographer;
     private String details;
@@ -17,6 +21,14 @@ public class Picture {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getFk_id() {
+        return fk_id;
+    }
+
+    public void setFk_id(Long fk_id) {
+        this.fk_id = fk_id;
     }
 
     public String getName() {
